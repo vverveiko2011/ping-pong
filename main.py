@@ -31,7 +31,7 @@ class Player(GameSprite):
         if self.Up and self.Rect.y >= 20:
             self.Rect.y -= self.Speed
             Racket3.Rect.y -= self.Speed
-        elif self.Down and self.Rect.y <= 550:
+        elif self.Down and self.Rect.y <= 450:
             self.Rect.y += self.Speed
             Racket3.Rect.y += self.Speed
     
@@ -39,7 +39,7 @@ class Player(GameSprite):
         if self.Up and self.Rect.y >= 20:
             self.Rect.y -= self.Speed
             Racket4.Rect.y -= self.Speed
-        elif self.Down and self.Rect.y <= 550:
+        elif self.Down and self.Rect.y <= 450:
             self.Rect.y += self.Speed
             Racket4.Rect.y += self.Speed
 
@@ -58,7 +58,7 @@ class Enemy(GameSprite):
         global timeUpdate2
         self.Rect.x += self.Speed*self.DirectionX
         self.Rect.y += self.Speed*self.DirectionY
-        if self.Rect.y < 0 or self.Rect.y > 650:
+        if self.Rect.y < 0 or self.Rect.y > 450:
             self.DirectionY *= -1
         if self.colliderect(Racket1.Rect):
             self.DirectionX *= -1
@@ -72,24 +72,24 @@ class Enemy(GameSprite):
                 self.Rect.x = 225
                 self.Rect.y = 100
                 timeUpdate2 = tt.time()
-            elif self.Rect.x > 650:
+            elif self.Rect.x > 850:
                 count2 += 1
                 self.Rect.x = 225
                 self.Rect.y = 100
                 timeUpdate2 = tt.time()
         
 
-win = display.set_mode((500, 700))
+win = display.set_mode((700, 500))
 display.set_caption('Ping-Pong')
 
-Background = transform.scale(image.load("background.png"), (500, 700))
+Background = transform.scale(image.load("background.png"), (700, 500))
 
 Racket1 = Player("racket1.png", 10, 20, 5, 25, 75)
-Racket2 = Player("racket2.png", 440, 550, 5, 25, 75)
+Racket2 = Player("racket2.png", 655, 350, 5, 25, 75)
 Racket3 = Player("racket22.png", 16, 94, 5, 15, 40)
-Racket4 = Player("racket11.png", 445, 624, 5, 15, 40)
+Racket4 = Player("racket11.png", 660, 424, 5, 15, 40)
 
-Ball = Enemy("ball.png", 225, 100, 1, 50, 50)
+Ball = Enemy("ball.png", 350, 100, 1, 50, 50)
 
 count1 = 0
 count2 = 0
@@ -129,8 +129,8 @@ while Game:
 
         scoreText = font1.render(str(count1)+" : "+str(count2), True, (0, 0, 0))
         timeText = font1.render(str(int(tt.time()-timeStart)), True, (0, 0, 0))
-        win.blit(scoreText, (175, 15))
-        win.blit(timeText, (285, 15))
+        win.blit(scoreText, (275, 15))
+        win.blit(timeText, (385, 15))
 
         if tt.time()-timeStart > 30:
             timeFinish = tt.time()
@@ -174,9 +174,9 @@ while Game:
     else:
         totalScoreText = font2.render("Score: "+str(count1)+" : "+str(count2), True, (0, 0, 0))
         totalTimeText = font2.render("Time: "+str(int(timeFinish-timeStart)), True, (0, 0, 0))
-        win.blit(totalScoreText, (125, 125))
-        win.blit(totalTimeText, (150, 170))
-        win.blit(restartText, (100, 220))
+        win.blit(totalScoreText, (225, 125))
+        win.blit(totalTimeText, (250, 170))
+        win.blit(restartText, (200, 220))
 
 
         for e in event.get():
